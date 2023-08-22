@@ -1,7 +1,5 @@
 package com.capgemini.gzabek.e01;
 
-import lombok.SneakyThrows;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,8 +7,7 @@ import java.util.stream.IntStream;
 
 public class MaxPlatformThreads {
 
-    @SneakyThrows
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         AtomicInteger counter = new AtomicInteger(0);
 
         var threads = IntStream.range(0, 10_000)
