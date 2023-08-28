@@ -2,18 +2,17 @@ package com.capgemini.gzabek.e01;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class MaxPlatformThreads {
 
     public static void main(String[] args) throws InterruptedException {
-        AtomicInteger counter = new AtomicInteger(0);
 
-        var threads = IntStream.range(0, 10_000)
+        var threads = IntStream.range(0, 50_000)
                 .mapToObj(i -> new Thread(() -> {
                     try {
-                        Thread.sleep(10_000_000);
+                        TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
                         throw new AssertionError(e);
                     }
@@ -22,14 +21,12 @@ public class MaxPlatformThreads {
         var begin = Instant.now();
 
         for (var thread : threads) {
-            System.out.println(counter.getAndIncrement());
             thread.start();
         }
 
-        for (var thread : threads) {
+        for (Thread thread : threads) {
             thread.join();
         }
-
         var end = Instant.now();
         System.out.println("# cores = " + Runtime.getRuntime().availableProcessors());
         System.out.println("Time = " + Duration.between(begin, end).toMillis() + "ms");
