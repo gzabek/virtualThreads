@@ -9,12 +9,12 @@ public class MaxVirtualThreads {
 
     public static void main(String[] args) throws InterruptedException {
 
-        var threads = IntStream.range(0, 50_000)
+        var threads = IntStream.range(0, 500_000)
                 .mapToObj(index -> Thread.ofVirtual()
                         .name("virtual-", index)
                         .unstarted(() -> {
                             try {
-                                TimeUnit.SECONDS.sleep(1);
+                                TimeUnit.MILLISECONDS.sleep(1);
                             } catch (InterruptedException e) {
                                 throw new RuntimeException(e);
                             }

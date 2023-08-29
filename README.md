@@ -1,4 +1,6 @@
 # virtualThreads
+## Presentation
+[prezentacja_vt.pdf](prezentacja/prezentacja_vt.pdf)
 ## Documentation
 ### Project Loom & JDK spec
 https://www.baeldung.com/openjdk-project-loom
